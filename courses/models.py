@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from .fields import OrderField
 # Create your models here.
 class Subject(models.Model):
     title = models.CharField('标题', max_length=200)
@@ -28,8 +29,11 @@ class Module(models.Model):
     course = models.ForeignKey(Course, verbose_name='课程', related_name='modules')
     title = models.CharField('标题', max_length=200)
     description = models.TextField('描述', blank=True)
+    order = OrderField(verbose_name='排序', blank=True, for_fields=['course'])
+    class Meta:
+        ordering = ['order']
     def __str__(self):
-        return self.title
+        return '{}. {}'.format(self.order, self.title)
 
 class Content(models.Model):
     module = models.ForeignKey(Module, verbose_name='课程单元', related_name='contents')
@@ -37,6 +41,9 @@ class Content(models.Model):
                                      limit_choices_to={'model__in': ('text', 'video', 'image', 'file')})
     object_id = models.PositiveIntegerField('关联模型的主键')
     item = GenericForeignKey('content_type', 'object_id')
+    order = OrderField(verbose_name='排序', blank=True, for_fields=['module'])
+    class Meta:
+        ordering = ['order']
 
 class ItemBase(models.Model):
     owner = models.ForeignKey(User, verbose_name='教师', related_name='%(class)s_related')
