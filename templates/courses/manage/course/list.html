@@ -11,6 +11,7 @@
                 <p>
                     <a href="{% url 'course_edit' course.id %}">编辑</a>
                     <a href="{% url 'course_delete' course.id %}">删除</a>
+                    <a href="{% url 'course_module_update' course.id %}">编辑课程单元</a>
                 </p>
             </div>
         {% empty %}
