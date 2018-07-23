@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}My courses{% endblock %}
+
+{% block content %}
+    <h1>我的课程</h1>
+    <div class="module">
+        {% for course in object_list %}
+            <div class="course-info">
+                <h3>{{ course.title }}</h3>
+                <p>
+                    <a href="{% url 'course_edit' course.id %}">编辑</a>
+                    <a href="{% url 'course_delete' course.id %}">删除</a>
+                </p>
+            </div>
+        {% empty %}
+            <p>您还没有创建任何课程。</p>
+        {% endfor %}
+        <p>
+            <a href="{% url 'course_create' %}" class="button">创建新的课程</a>
+        </p>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
