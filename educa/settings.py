@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'embed_video',
     'students',
     'courses',
     'django.contrib.admin',
@@ -127,6 +128,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #LOGIN_REDIRECT_URL = '/course/mine/'
 LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
