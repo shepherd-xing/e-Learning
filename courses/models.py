@@ -19,6 +19,7 @@ class Course(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     overview = models.TextField('概述')
     created = models.DateTimeField('创建时间', auto_now_add=True)
+    students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
     class Meta:
         ordering = ('-created',)
     def __str__(self):

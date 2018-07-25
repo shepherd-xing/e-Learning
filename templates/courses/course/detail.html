@@ -17,6 +17,15 @@
             教师：{{ course.owner.get_full_name }}
         </p>
         {{ object.overview|linebreaks }}
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'student_enroll_course' %}" method="post">
+                {% csrf_token %}
+                {{ enroll_form }}
+                <input type="submit" class="button" value="报名">
+            </form>
+        {% else %}
+            <a href="{% url 'student_registration' %}" class="button">注册</a>
+        {% endif %}
     </div>
 {% endwith %}
 {% endblock %}
