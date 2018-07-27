@@ -9,3 +9,4 @@ class SubjectListView(generics.ListAPIView):
 class SubjectDetailView(generics.RetrieveAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
+
